@@ -4,11 +4,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th @click="setCurrentSort('siteID')">Site Id</th>
-          <th @click="setCurrentSort('catalogId')">Catalog Id</th>
-          <th @click="setCurrentSort('catalogName')">Catalog Name</th>
-          <th @click="setCurrentSort('categoryId')">Category Id</th>
-          <th @click="setCurrentSort('categoryName')">Category Name</th>
+          <th @click="setCurrentSort('siteID')">Site Id <icon scale="0.7" :name="sortIcon" v-if="currentSort.prop === 'siteID'" /></th>
+          <th @click="setCurrentSort('catalogId')">Catalog Id <icon scale="0.7" :name="sortIcon" v-if="currentSort.prop === 'catalogId'" /></th>
+          <th @click="setCurrentSort('catalogName')">Catalog Name <icon scale="0.7" :name="sortIcon" v-if="currentSort.prop === 'catalogName'" /></th>
+          <th @click="setCurrentSort('categoryId')">Category Id <icon scale="0.7" :name="sortIcon" v-if="currentSort.prop === 'categoryId'" /></th>
+          <th @click="setCurrentSort('categoryName')">Category Name <icon scale="0.7" :name="sortIcon" v-if="currentSort.prop === 'categoryName'" /></th>
         </tr>
       </thead>
       <tbody>
@@ -26,9 +26,14 @@
 
 <script>
 import Search from './Search'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/chevron-up'
+import 'vue-awesome/icons/chevron-down'
+
 export default {
   components: {
-    Search
+    Search,
+    Icon
   },
   data() {
     return {
@@ -48,6 +53,9 @@ export default {
               catalog.categoryName.toString().includes(this.searchQuery)
           )
         : this.$store.state.catalogs
+    },
+    sortIcon() {
+      return this.currentSort.type ? 'chevron-up' : 'chevron-down'
     }
   },
   methods: {
