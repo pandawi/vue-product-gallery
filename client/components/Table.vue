@@ -80,7 +80,7 @@ export default {
   },
   filters: {
     highlight(val, query) {
-      return query ? val.toString().replace(query, `<strong>${query}</strong>`) : val
+      return val.toString().replace(query, `<strong>${query}</strong>`)
     }
   }
 }
