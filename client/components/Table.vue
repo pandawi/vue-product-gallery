@@ -32,9 +32,7 @@ export default {
   },
   data() {
     return {
-      currentSort: 'catalogId',
-      currentType: 'ASC',
-      types: ['DESC', 'ASC'],
+      currentSort: { prop: 'catalogId', type: 0 },
       searchQuery: ''
     }
   },
@@ -54,16 +52,15 @@ export default {
   },
   methods: {
     setCurrentSort(value) {
-      let currentType = this.types.indexOf(this.currentType)
-      if (value === this.currentSort) {
-        this.currentType = this.types[Number(!currentType)]
+      if (value === this.currentSort.prop) {
+        this.currentSort.type = !this.currentSort.type
       } else {
-        this.currentType = 'DESC'
+        this.currentSort.type = 0
       }
-      this.currentSort = value
+      this.currentSort.prop = value
       this.$store.dispatch('setSort', {
-        property: this.currentSort,
-        order: this.currentType
+        property: this.currentSort.prop,
+        order: this.currentSort.type ? 'ASC' : 'DESC'
       })
     },
     search(query) {
