@@ -8,7 +8,6 @@
     "build": "webpack --config build/webpack.prod.js",
     "dev": "node build/server.js",
     "lint": "xo **/client/**/*.{vue,js} !node_modules/**",
-    "prestart": "node build/app.js",
     "start": "npm run dev"
   },
   "author": "",
